@@ -105,9 +105,118 @@
                             <label for="message" class="heading-features"> {{__('globle.form.dob')}} <strong style="color: red;">*</strong></label>
                             <input type="date" name="dob" class="input-contact" required>
                         </div>
-                        <div class="input-message">
-                            <label for="message" class="heading-features"> {{__('globle.form.current_address')}} <strong style="color: red;">*</strong></label>
-                            <input type="text" name="pob" class="input-contact"  required>
+                        
+
+                        <div class="input-row">
+
+
+                            {{-- <div class="input-message">
+                                <label for="message" class="heading-features"> {{__('globle.form.current_address')}}
+                                    <strong style="color: red;">*</strong></label>
+                                <input type="text" name="pob" class="input-contact" placeholder="#123, St.123,..."
+                                    required>
+                            </div> --}}
+
+
+
+                            <div class="input-email">
+                                <label for="message" class="heading-features"> {{__('globle.form.Province')}}
+                                    <strong style="color: red;">*</strong></label>
+                                <select id="country" name="province" class="input-contact input-select">
+                                    <option value="" selected disabled> {{__('globle.form.choose')}} {{__('globle.form.Province')}}</option>
+                                    @foreach ( $countries as $key=>$country){
+                                    <option value="{{$key}}">
+
+                                        {{-- {{ $country[0]->vallage }} --}}
+                                        {{ $country}}
+
+
+                                    </option> }
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+
+
+                            <div class="input-services">
+                                <label for="message" class="heading-features"> {{__('globle.form.District')}}
+                                    <strong style="color: red;">*</strong></label>
+                                <select name="district" id="state" class="input-contact input-select"></select>
+                            </div>
+
+                            <div class="input-services">
+                                <label for="message" class="heading-features"> {{__('globle.form.Commune')}} <strong
+                                        style="color: red;">*</strong></label>
+                                <select name="commune" id="city" class="input-contact input-select"></select>
+                            </div>
+
+                            {{-- <div class="input-services">
+                                <label for="message" class="heading-features"> {{__('globle.form.village')}} <strong
+                                        style="color: red;">*</strong></label>
+                                <select name="city" id="city" class="input-contact input-select"></select>
+                            </div> --}}
+
+
+
+
+                            {{-- <div class="form-group">
+                                <label for="city">Commune:</label>
+                                <select name="city" id="city" class="form-control"></select>
+                            </div> --}}
+
+                            <script type=text/javascript>
+                                $('#country').change(function(){
+                            var countryID = $(this).val();  
+                            if(countryID){
+                              $.ajax({
+                                type:"GET",
+                                url:"{{url('getState')}}?country_id="+countryID,
+                                success:function(res){        
+                                if(res){
+                                  $("#state").empty();
+                                  $("#state").append('<option>{{__('globle.form.choose')}} {{__('globle.form.District')}}</option>');
+                                  $.each(res,function(key,value){
+                                    $("#state").append('<option value="'+key+'">'+value+'</option>');
+                                  });
+                                
+                                }else{
+                                  $("#state").empty();
+                                }
+                                }
+                              });
+                            }else{
+                              $("#state").empty();
+                              $("#city").empty();
+                            }   
+                            });
+                            $('#state').on('change',function(){
+                            var stateID = $(this).val();  
+                            if(stateID){
+                              $.ajax({
+                                type:"GET",
+                                url:"{{url('getCity')}}?state_id="+stateID,
+                                success:function(res){        
+                                if(res){
+                                  $("#city").empty();
+                                  $("#city").append('<option>{{__('globle.form.choose')}} {{__('globle.form.Commune')}}</option>');
+                                  $.each(res,function(key,value){
+                                    $("#city").append('<option value="'+key+'">'+value+'</option>');
+                                  });
+                                
+                                }else{
+                                  $("#city").empty();
+                                }
+                                }
+                              });
+                            }else{
+                              $("#city").empty();
+                            }
+                              
+                            });
+                            </script>
+
+
                         </div>
 
                         <div class="input-message">

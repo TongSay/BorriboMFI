@@ -43,8 +43,11 @@ class JobController extends Controller
         'phone'=>$request->get('phone'),
         'gender' =>$request->get('gender'),
         'dob'=>$request->get('dob'),
-        'pob'=>$request->get('pob'),
+        
         'remark'=>$request->get('remark'),
+        'province'=>$request->get('province'),
+        'district'=>$request->get('district'),
+        'commune'=>$request->get('commune'),
        
 
     ]

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Models\JobType;
+
+use DB;
 use RealRashid\SweetAlert\Facades\Alert;
 class JobController extends Controller
 {
@@ -62,12 +64,14 @@ class JobController extends Controller
         $title = 'Apply Jobs';
 
         $job = Job::find($id);
+
+        $countries = DB::table("countries")->pluck("province","id_province");
         if (session('success_message'))
         {
             Alert::success(__('alert.Success'), session('success_message'));
         }
 
         
-        return view('frontend.job.applyjob',compact('job','title'));
+        return view('frontend.job.applyjob',compact('job','title','countries'));
     }
 }

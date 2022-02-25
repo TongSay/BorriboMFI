@@ -18,9 +18,7 @@ class ApplyLoanController extends Controller
         $title = 'Apply Loan';
         $loan = Loan::find($id);
 
-        $countries = DB::table('locations')->orderBy('province')->get()->groupBy(function($item) {
-            return $item->province;
-        });
+        $countries = DB::table("countries")->pluck("province","id_province");
 
         if (session('success_message'))
         {
@@ -33,12 +31,12 @@ class ApplyLoanController extends Controller
     {
         $title = 'Apply Loan'; 
         
-        $countries = DB::table('locations')->orderBy('province')->get()->groupBy(function($item) {
-            return $item->province;
-        });
+        // $countries = DB::table('locations')->orderBy('province')->get()->groupBy(function($item) {
+        //     return $item->province;
+        // });
 
-        // $countries = DB::table("countries")->pluck("name","id");
-
+        $countries = DB::table("countries")->pluck("province","id_province");
+        //return response()->json($countries);
       //  $grouped = DB::table("address");
        // $countries = $grouped->groupBy('id_country');
         
@@ -56,16 +54,18 @@ class ApplyLoanController extends Controller
 	{
 
 		$states = DB::table("states")
-		->where("country_id",$request->country_id)
-		->pluck("name","id");
+		->where("id_province",$request->country_id)
+		->pluck("district","id_district");
+
 		return response()->json($states);
+		
 	}
 
 	public function getCity(Request $request)
 	{
 		$cities = DB::table("cities")
-		->where("state_id",$request->state_id)
-		->pluck("name","id");
+		->where("id_district",$request->state_id)
+		->pluck("commune","id_commune");
 		return response()->json($cities);
 	}
 

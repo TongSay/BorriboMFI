@@ -107,6 +107,10 @@ return [
         'LoanPurpose' => 'Loan Purpose',
         'amount' => 'Amount',
 
+        'Province' => 'City / Province',
+        'District' => 'District',
+        'Commune' => 'Commune',
+
 
     ],
 

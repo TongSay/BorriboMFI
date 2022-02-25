@@ -196,7 +196,7 @@
                                         <div class="form-group">
                                             <label for="pob">{{ __('globle.Address') }}</label>
                                             <input disabled class="form-control @error('pob') is-invalid @enderror"
-                                                value="{{ $viewapplyedjob->pob }}" name="pob" type="text">
+                                                value="{{ $viewapplyedjob->province }}" name="pob" type="text">
 
                                             @error('pob')
                                                 <span class="invalid-feedback" role="alert">
