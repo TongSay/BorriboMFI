@@ -11,6 +11,7 @@ use App\Models\JobType;
 use App\Models\ApplyJob;
 use App\Models\MediaJob;
 use Carbon\Carbon;
+use DB;
 use RealRashid\SweetAlert\Facades\Alert;
 class JobController extends Controller
 {
@@ -108,9 +109,23 @@ if($request->hasFile('photos'))
             $viewapplyedjob->update($data);
         }
 
+        // Address
+
+        $province = DB::table("countries")
+		->where("id_province",'=',$viewapplyedjob->province)
+        ->pluck("province");
+
+        $district = DB::table("states")
+		->where("id_district",'=',$viewapplyedjob->district)
+        ->pluck("district");
+
+        $commune = DB::table("cities")
+		->where("id_commune",'=',$viewapplyedjob->commune)
+        ->pluck("commune");
+       
         
 
-        return view('admin.job.viewapplyedjob', compact('viewapplyedjob','files'));
+        return view('admin.job.viewapplyedjob', compact('viewapplyedjob','files','province','district','commune'));
 
 
     }

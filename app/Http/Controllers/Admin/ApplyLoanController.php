@@ -174,11 +174,26 @@ class ApplyLoanController extends Controller
             $data['read_at'] = $date;
 
             $viewapplyedloan->update($data);
+
+
+            // Address
+
+        $province = DB::table("countries")
+		->where("id_province",'=',$viewapplyedloan->province)
+        ->pluck("province");
+
+        $district = DB::table("states")
+		->where("id_district",'=',$viewapplyedloan->district)
+        ->pluck("district");
+
+        $commune = DB::table("cities")
+		->where("id_commune",'=',$viewapplyedloan->commune)
+        ->pluck("commune");
            
         
         }
 
-        return view('admin.loan.viewapplyedloan', compact('viewapplyedloan'));
+        return view('admin.loan.viewapplyedloan', compact('viewapplyedloan', 'province', 'district', 'commune'));
 
 
     }

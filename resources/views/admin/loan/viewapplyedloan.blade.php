@@ -170,7 +170,7 @@
                                     <div class="form-group">
                                         <label for="pob">{{__('globle.Address')}}</label>
                                         <input disabled class="form-control @error('pob') is-invalid @enderror"
-                                            value="{{$viewapplyedloan->province}}" name="pob" type="text">
+                                            value=" {{ $province[0] }}, {{ $district[0] }} , {{ $commune[0] }} "  type="text">
 
                                         @error('pob')
                                         <span class="invalid-feedback" role="alert">
